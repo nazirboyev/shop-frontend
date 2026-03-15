@@ -1,0 +1,95 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#f4f4f4;
+}
+
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:white;
+position:relative;
+z-index:1000;
+}
+
+.logo{font-size:28px;}
+.nav-links{display:flex;align-items:center;gap:30px;}
+.nav-links a{text-decoration:none;color:black;font-size:18px;}
+
+/* CART */
+.cart{position:relative;}
+.cart input{display:none;}
+.cart label{cursor:pointer;font-size:20px;}
+.cart-dropdown{
+position:absolute;
+top:40px;
+right:0;
+width:260px;
+height:300px;
+background:white;
+border:1px solid #ccc;
+display:none;
+flex-direction:column;
+justify-content:space-between;
+padding:20px;
+z-index:2000;
+}
+.cart input:checked ~ .cart-dropdown{display:flex;}
+.cart-dropdown button{background:black;color:white;border:none;padding:15px;cursor:pointer;}
+
+/* CATEGORY GRID */
+.categories{
+width:90%;
+margin:40px auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+grid-template-rows:220px 220px 260px;
+gap:20px;
+}
+.category{position:relative;overflow:hidden;}
+.category img{width:100%;height:100%;object-fit:cover;transition:0.3s;}
+.category:hover img{transform:scale(1.03);}
+.overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:15px 30px;text-align:center;}
+.big{grid-column:1/3;}
+
+/* PRODUCTS */
+.products{width:90%;margin:40px auto;}
+.product-section{margin-bottom:60px;}
+.product-section h1{margin-bottom:20px;}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:25px;}
+.product{position:relative;overflow:hidden;}
+.product img{width:100%;height:260px;object-fit:cover;transition:0.3s;}
+.product:hover img{transform:scale(1.05);box-shadow:0 5px 15px rgba(0,0,0,0.2);}
+
+/* ADD TO CART */
+.add{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:10px 20px;
+border:1px solid black;
+display:none;
+cursor:pointer;
+}
+.product:hover .add{display:block;}
+
+/* INFO */
+.info{display:flex;justify-content:space-between;margin-top:10px;font-size:16px;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+.product-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+.product-grid{grid-template-columns:1fr;}
+}
