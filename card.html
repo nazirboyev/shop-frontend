@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout</title>
+
+<link rel="stylesheet" href="main.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+<i class="fa-solid fa-crown"></i>
+</div>
+
+<nav class="nav-links">
+
+<a href="index.html">Shop</a>
+<a href="signin.html">Sign In</a>
+
+</nav>
+
+</header>
+
+
+<section class="checkout">
+
+<div class="checkout-header">
+
+<span>Product</span>
+<span>Description</span>
+<span>Quantity</span>
+<span>Price</span>
+<span>Remove</span>
+
+</div>
+
+
+<div id="cart-items"></div>
+
+
+<h2 class="total">
+Total: $<span id="total">0</span>
+</h2>
+
+
+</section>
+
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let container = document.getElementById("cart-items");
+let total = 0;
+
+function render(){
+
+container.innerHTML="";
+total = 0;
+
+cart.forEach((item,index)=>{
+
+total += item.price * item.qty;
+
+container.innerHTML += `
+
+<div class="checkout-item">
+
+<img src="${item.img}">
+
+<span>${item.name}</span>
+
+<div class="quantity">
+
+<button onclick="minus(${index})">-</button>
+
+<span>${item.qty}</span>
+
+<button onclick="plus(${index})">+</button>
+
+</div>
+
+<span>$${item.price * item.qty}</span>
+
+<span class="remove" onclick="removeItem(${index})">X</span>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("total").innerText = total;
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+}
+
+function plus(i){
+cart[i].qty++;
+render();
+}
+
+function minus(i){
+
+if(cart[i].qty>1){
+cart[i].qty--;
+}
+
+render();
+}
+
+function removeItem(i){
+cart.splice(i,1);
+render();
+}
+
+render();
+
+</script>
+
+</body>
+</html>
